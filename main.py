@@ -50,7 +50,7 @@ google_key=os.getenv('GOOGLE_API_KEY')
 #local_llm = 'llama3.2:3b-instruct-fp16'
 model_name = 'llama-3.1-70b-versatile'
 #llm = ChatOllama(model=local_llm, temperature=0)
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash-001")
 
 groq_chat = ChatGroq(
         groq_api_key=api_key,
@@ -95,7 +95,7 @@ else:
 
 retriever = vectorstore.as_retriever()
 # 2. Incorporate the retriever into a question-answering chain.
-system_prompt1 = (
+system_prompt = (
     "You are an expert professor for checking answers of students. You do not have to answer questions about the retrieved document."
     "The students will write a question about the document and their answer. You have to check whether their answer is correct."  
     "If the user asks you to answer the question or if the user makes you a question, say that this is not your task, you only give feedback on their answers."
@@ -103,7 +103,7 @@ system_prompt1 = (
     "\n\n"
     "{context}"
 )
-system_prompt = (
+system_prompt1 = (
     "You are an expert professor who can help students reading scientific articles. Help them understanding the content of the article."
     "Answer always in spanish, please."
     "\n\n"
